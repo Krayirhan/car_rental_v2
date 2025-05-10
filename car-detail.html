@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Araç Detayı | Rento Rent</title>
+
+  <!-- Font & Icon -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
+  <!-- Stil -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- JS -->
+  <script src="assets/js/car-detail.js" defer></script>
+  <script src="assets/js/login-register-control.js" defer></script>
+
+</head>
+<body class="dark-mode">
+  <!-- HEADER -->
+  <header class="header-dark">
+    <div class="logo">🚗 <span style="color:#00FFF7">Rento</span> <span style="color:#58F">Rent</span></div>
+    <nav>
+      <ul>
+        <li><a href="/car-rental/index.html" class="active">Ana Sayfa</a></li>
+        <li><a href="/car-rental/cars.html">Araçlar</a></li>
+        <li><a href="/car-rental/kampanyalar.html">Kampanyalar</a></li>
+        <li><a href="/car-rental/iletisim.html">İletişim</a></li>
+
+        <!-- oturum yoksa -->
+        <li id="loginLink"><a href="#" onclick="switchToLogin();toggleAuth(true)">Giriş Yap</a></li>
+        <li id="registerLink"><a href="#" onclick="switchToRegister();toggleAuth(true)">Kayıt Ol</a></li>
+
+        <!-- oturum varsa -->
+        <li id="profileMenu" class="hidden">
+          👤 <span id="profileName"></span>
+          <a href="#" onclick="logout()"> (Çıkış Yap)</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- DETAY KISMI -->
+  <main class="container">
+    <div id="car-details">Yükleniyor...</div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-dark">
+    <p>&copy; 2025 Rento | Tüm hakları saklıdır.</p>
+  </footer>
+    <!-- GİRİŞ / KAYIT MODAL ---------------------------------------------- -->
+    <div class="auth-popup-bg" id="authModal">
+      <div class="auth-popup">
+        <span class="auth-close-btn" onclick="toggleAuth(false)">×</span>
+        <h2 id="authTitle">Giriş Yap</h2>
+  
+        <p id="authMsg" class="error hidden"></p>
+  
+        <form id="authForm" action="/car-rental/backend/login.php" method="post">
+          <input type="email"    name="email"    placeholder="E-Posta" required>
+          <input type="password" name="password" placeholder="Şifre"  required>
+          <button class="btn">Giriş</button>
+        </form>
+  
+        <p id="authSwitchText">
+          Hesabınız yok mu?
+          <a href="#" onclick="switchToRegister()">Kayıt Ol</a>
+        </p>
+      </div>
+    </div>
+</body>
+</html>

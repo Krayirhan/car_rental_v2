@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rento | Hayalindeki Aracı Kirala</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/login-register-control.js" defer></script>
+</head>
+<body class="dark-mode">
+
+  <!-- HEADER ----------------------------------------------------------- -->
+  <header class="header-dark">
+    <div class="logo">🚗 <span style="color:#00FFF7">Rento</span> <span style="color:#58F">Rent</span></div>
+    <nav>
+      <ul>
+        <li><a href="/car-rental/index.html" class="active">Ana Sayfa</a></li>
+        <li><a href="/car-rental/cars.html">Araçlar</a></li>
+        <li><a href="/car-rental/kampanyalar.html">Kampanyalar</a></li>
+        <li><a href="/car-rental/iletisim.html">İletişim</a></li>
+
+        <!-- oturum yoksa -->
+        <li id="loginLink"><a href="#" onclick="switchToLogin();toggleAuth(true)">Giriş Yap</a></li>
+        <li id="registerLink"><a href="#" onclick="switchToRegister();toggleAuth(true)">Kayıt Ol</a></li>
+
+        <!-- oturum varsa -->
+        <li id="profileMenu" class="hidden">
+          👤 <span id="profileName"></span>
+          <a href="#" onclick="logout()"> (Çıkış Yap)</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO ------------------------------------------------------------- -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1 class="text-glow">Hayalinizdeki Aracı Hemen Kiralayın!</h1>
+      <p>Geniş araç filomuz, uygun fiyatlarımız ve 7/24 yol yardım hizmetimizle yanınızdayız.</p>
+      <a href="cars.html" class="btn btn-glow">Araçları Gör</a>
+    </div>
+  </section>
+
+  <!-- ARAMA KUTUSU ------------------------------------------------------ -->
+  <section class="search-box" id="searchBox">
+    <select id="pickup"></select>
+    <select id="dropoff"></select>
+
+    <input type="date" id="pickDate">
+    <input type="date" id="dropDate">
+
+    <select id="rentType">
+      <option>Günlük Kiralama</option>
+      <option>Aylık Kiralama</option>
+    </select>
+
+    <button id="searchBtn">🔍 Araç Bul</button>
+  </section>
+
+  <!-- SONUÇ LİSTESİ (yeni) --------------------------------------------- -->
+  <section class="container grid hidden" id="resultGrid"></section>
+
+  <!-- ÖNE ÇIKAN ARAÇLAR ------------------------------------------------- -->
+  <section class="container grid">
+    <div class="card">
+      <img src="assets/img/bmw.png" alt="BMW" />
+      <h3>BMW 3 Serisi</h3>
+      <p>Konforlu ve şık bir sürüş deneyimi için tam size göre!</p>
+      <a href="car-detail.html?id=1" class="btn">Detayları Gör</a>
+    </div>
+    <div class="card">
+      <img src="assets/img/clio.png" alt="Clio" />
+      <h3>Renault Clio</h3>
+      <p>Şehir içi kullanım için ekonomik ve pratik bir seçenek.</p>
+      <a href="car-detail.html?id=2" class="btn">Detayları Gör</a>
+    </div>
+    <div class="card">
+      <img src="assets/img/tiguan.png" alt="Tiguan" />
+      <h3>Volkswagen Tiguan</h3>
+      <p>Geniş aileler ve macera tutkunları için SUV konforu.</p>
+      <a href="car-detail.html?id=3" class="btn">Detayları Gör</a>
+    </div>
+  </section>
+
+  <!-- FOOTER ----------------------------------------------------------- -->
+  <footer class="footer-dark">
+    <p>&copy; 2025 Rento | Tüm hakları saklıdır.</p>
+  </footer>
+
+  <!-- GİRİŞ / KAYIT MODAL ---------------------------------------------- -->
+  <div class="auth-popup-bg" id="authModal">
+    <div class="auth-popup">
+      <span class="auth-close-btn" onclick="toggleAuth(false)">×</span>
+      <h2 id="authTitle">Giriş Yap</h2>
+
+      <p id="authMsg" class="error hidden"></p>
+
+      <form id="authForm" action="/car-rental/backend/login.php" method="post">
+        <input type="email"    name="email"    placeholder="E-Posta" required>
+        <input type="password" name="password" placeholder="Şifre"  required>
+        <button class="btn">Giriş</button>
+      </form>
+
+      <p id="authSwitchText">
+        Hesabınız yok mu?
+        <a href="#" onclick="switchToRegister()">Kayıt Ol</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

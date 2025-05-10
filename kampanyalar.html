@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kampanyalar | Rento</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/login-register-control.js" defer></script>
+  <script src="assets/js/campaigns.js" defer></script>
+</head>
+<body class="dark-mode">
+  <header class="header-dark">
+    <div class="logo">🚗 <span style="color:#00FFF7">Rento</span> <span style="color:#58F">Rent</span></div>
+    <nav>
+      <ul>
+        <li><a href="/car-rental/index.html" class="active">Ana Sayfa</a></li>
+        <li><a href="/car-rental/cars.html">Araçlar</a></li>
+        <li><a href="/car-rental/kampanyalar.html">Kampanyalar</a></li>
+        <li><a href="/car-rental/iletisim.html">İletişim</a></li>
+        <li id="loginLink"><a href="#" onclick="switchToLogin();toggleAuth(true)">Giriş Yap</a></li>
+        <li id="registerLink"><a href="#" onclick="switchToRegister();toggleAuth(true)">Kayıt Ol</a></li>
+        <li id="profileMenu" class="hidden">
+          👤 <span id="profileName"></span>
+          <a href="#" onclick="logout()"> (Çıkış Yap)</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2 class="text-glow" style="text-align:center; margin-top:2rem;">Kampanyalar</h2>
+
+    <!-- Kategori Başlıkları -->
+    <div class="kampanya-tabs">
+      <button class="btn-tab active" onclick="switchTab(event, 'gunluk')">Günlük Kampanyalar</button>
+      <button class="btn-tab" onclick="switchTab(event, 'aylik')">Aylık Kampanyalar</button>
+    </div>
+
+    <!-- Günlük Kampanyalar -->
+    <section id="gunluk" class="kampanya-section active">
+      <div class="grid"></div> <!-- JS verisi buraya eklenecek -->
+    </section>
+
+    <!-- Aylık Kampanyalar -->
+    <section id="aylik" class="kampanya-section">
+      <div class="grid"></div> <!-- JS verisi buraya eklenecek -->
+    </section>
+  </main>
+
+  <footer class="footer-dark">
+    <p>&copy; 2025 Rento | Tüm hakları saklıdır.</p>
+  </footer>
+
+  <script>
+    function switchTab(e, tabId) {
+      document.querySelectorAll('.kampanya-section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.btn-tab').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      e.target.classList.add('active');
+    }
+  </script>
+
+  <style>
+    .kampanya-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .btn-tab {
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--input-dark);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .btn-tab.active {
+      background: var(--primary);
+      color: black;
+    }
+
+    .kampanya-section { display: none; }
+    .kampanya-section.active { display: block; }
+  </style>
+
+  <!-- GİRİŞ / KAYIT MODAL -->
+  <div class="auth-popup-bg" id="authModal">
+    <div class="auth-popup">
+      <span class="auth-close-btn" onclick="toggleAuth(false)">×</span>
+      <h2 id="authTitle">Giriş Yap</h2>
+      <p id="authMsg" class="error hidden"></p>
+      <form id="authForm" action="/car-rental/backend/login.php" method="post">
+        <input type="email"    name="email"    placeholder="E-Posta" required>
+        <input type="password" name="password" placeholder="Şifre"  required>
+        <button class="btn">Giriş</button>
+      </form>
+      <p id="authSwitchText">
+        Hesabınız yok mu?
+        <a href="#" onclick="switchToRegister()">Kayıt Ol</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
